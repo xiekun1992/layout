@@ -3,6 +3,7 @@ sdl/2.26.1
 boost/1.81.0
 glfw/3.3.8
 freeglut/3.4.0
+rapidxml/1.13
 
 [tool_requires]
 cmake/3.22.6

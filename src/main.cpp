@@ -5,6 +5,9 @@
 // #include <GLFW/glfw3.h>
 #include <GL/glut.h>
 
+#include "layout_engine/shapes/Shape.hpp"
+#include "layout_engine/UIConverter.hpp"
+
 int width = 320, height = 320;
 float xPixelRatio = 2 / (float)width;
 float yPixelRatio = 2 / (float)height;
@@ -30,16 +33,24 @@ void display() {
   glFlush();
 }
 
-int main (int argc, char *argv[]) {
+// int main (int argc, char *argv[]) {
+int main() {
   std::cout << xPixelRatio << ", " << yPixelRatio << std::endl;
 
-  glutInit(&argc, argv);
-  glutInitWindowSize(width, height);
-  glutInitWindowPosition(10, 10);
-  glutCreateWindow("opengl demo");
-  glutDisplayFunc(display);
-  initGL();
-  glutMainLoop();
+  Shape shape(0, 0, 100, 50);
+
+  std::string s("E:/Desktop/conan-cmake/ui.xml");
+  UIConverter c(s);
+
+  // glutInit(&argc, argv);
+  // glutInitWindowSize(width, height);
+  // glutInitWindowPosition(10, 10);
+  // glutCreateWindow("opengl demo");
+  // glutDisplayFunc(display);
+  // initGL();
+  // glutMainLoop();
+
+  
 
   return 0;
 }

@@ -1,0 +1,11 @@
+{
+  "C_Cpp.default.includePath": [
+    "D:/.conan2/p/**"
+  ],
+  "files.associations": {
+    "*.h": "cpp",
+    "string": "cpp",
+    "optional": "cpp",
+    "type_traits": "cpp"
+  }
+}
