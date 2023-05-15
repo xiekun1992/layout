@@ -7,6 +7,7 @@ set(
   src/main.cpp
   src/layout_engine/UIConverter.cpp
   src/layout_engine/shapes/Shape.cpp
+  src/layout_engine/Engine.cpp
 )
 # find_package(ZLIB REQUIRED)
 # find_package(SDL2 REQUIRED)

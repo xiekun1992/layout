@@ -5,52 +5,55 @@
 // #include <GLFW/glfw3.h>
 #include <GL/glut.h>
 
+#include "layout_engine/Engine.hpp"
 #include "layout_engine/shapes/Shape.hpp"
 #include "layout_engine/UIConverter.hpp"
 
-int width = 320, height = 320;
-float xPixelRatio = 2 / (float)width;
-float yPixelRatio = 2 / (float)height;
+int width = 800, height = 600;
 
 void initGL() {
   glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 }
 
-void display() {
-  glClear(GL_COLOR_BUFFER_BIT);
+// void display() {
+//   glClear(GL_COLOR_BUFFER_BIT);
 
-  glBegin(GL_QUADS);
-  glColor3f(1.0, 0.0, 0.0);
-  glVertex2f(-160 * xPixelRatio, 00 * yPixelRatio);
-  glColor3f(0.0, 1.0, 0.0);
-  glVertex2f(-00 * xPixelRatio, 00 * yPixelRatio);
-  glColor3f(0.0, 0.0, 1.0);
-  glVertex2f(-00 * xPixelRatio, 70 * yPixelRatio);
-  glColor3f(1.0, 0.0, 1.0);
-  glVertex2f(-160 * xPixelRatio, 70 * yPixelRatio);
-  glEnd();
+//   glBegin(GL_QUADS);
+//   glColor3f(1.0, 0.0, 0.0);
+//   glVertex2f(-160 * xPixelRatio, 00 * yPixelRatio);
+//   glColor3f(0.0, 1.0, 0.0);
+//   glVertex2f(-00 * xPixelRatio, 00 * yPixelRatio);
+//   glColor3f(0.0, 0.0, 1.0);
+//   glVertex2f(-00 * xPixelRatio, 70 * yPixelRatio);
+//   glColor3f(1.0, 0.0, 1.0);
+//   glVertex2f(-160 * xPixelRatio, 70 * yPixelRatio);
+//   glEnd();
 
-  glFlush();
-}
+//   glFlush();
+// }
 
-// int main (int argc, char *argv[]) {
-int main() {
-  std::cout << xPixelRatio << ", " << yPixelRatio << std::endl;
+int main (int argc, char *argv[]) {
+  glutInit(&argc, argv);
+  glutInitWindowSize(width, height);
+  glutInitWindowPosition(0, 0);
+  glutCreateWindow("opengl demo");
 
-  Shape shape(0, 0, 100, 50);
+  // Shape shape(0, 0, 100, 50);
 
-  std::string s("E:/Desktop/conan-cmake/ui.xml");
-  UIConverter c(s);
+  UIConverter converter("E:/Desktop/conan-cmake/ui.xml");
+  converter.tree->traverseNode();
 
-  // glutInit(&argc, argv);
-  // glutInitWindowSize(width, height);
-  // glutInitWindowPosition(10, 10);
-  // glutCreateWindow("opengl demo");
-  // glutDisplayFunc(display);
+  Engine engine(width, height);
+  engine.layout(converter.tree);
+
+  glutDisplayFunc(initGL);
   // initGL();
-  // glutMainLoop();
-
-  
-
+  engine.render(converter.tree);
+  // display();
+  glutMainLoop();
+  // while (true) {
+  //   Sleep(30);
+  //   display();
+  // }
   return 0;
 }

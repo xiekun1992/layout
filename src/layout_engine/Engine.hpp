@@ -1,15 +1,23 @@
 #ifndef _ENGINE_H
 #define _ENGINE_H
 
-#include "./shapes/Shape.hpp"
 #include <vector>
+#include <GL/glut.h>
+#include "./shapes/Shape.hpp"
 
 class Engine {
-  // private:
+  private:
+    float xPixelRatio, yPixelRatio;
+    int width, height;
   public:
     Shape* layoutTree;
-    Engine();
+    Engine(int width, int height);
     ~Engine();
+
+    void layout(Shape* root);
+    void render(Shape* root);
+    void renderShape(Shape* shape);
+    void display();
 };
 
 #endif

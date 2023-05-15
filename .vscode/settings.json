@@ -6,6 +6,8 @@
     "*.h": "cpp",
     "string": "cpp",
     "optional": "cpp",
-    "type_traits": "cpp"
+    "type_traits": "cpp",
+    "memory": "cpp",
+    "vector": "cpp"
   }
 }

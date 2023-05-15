@@ -15,15 +15,13 @@ UIConverter::UIConverter(std::string filePath)
     // Find our root node
     xml_node<> *rootNode = doc.first_node("div");
     
-    Shape* rootShape = new Shape(
+    tree = new Shape(
       stoi(getNodeAttr(rootNode, "x").value_or("0")),
       stoi(getNodeAttr(rootNode, "y").value_or("0")),
       stoi(getNodeAttr(rootNode, "width").value_or("0")),
       stoi(getNodeAttr(rootNode, "height").value_or("0"))
     );
-    traverseNode(rootNode, rootShape);
-
-    rootShape->traverseNode();
+    traverseNode(rootNode, tree);
   }
   catch (exception e)
   {

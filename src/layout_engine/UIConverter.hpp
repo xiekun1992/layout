@@ -14,6 +14,8 @@ using namespace std;
 
 class UIConverter {
   public:
+    Shape* tree;
+
     UIConverter(std::string filePath);
     ~UIConverter();
     void traverseNode(xml_node<>* node, Shape* shape);
