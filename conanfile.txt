@@ -1,7 +1,7 @@
 [requires]
-sdl/2.26.1
-boost/1.81.0
-glfw/3.3.8
+# sdl/2.26.1
+# boost/1.81.0
+# glfw/3.3.8
 freeglut/3.4.0
 rapidxml/1.13
 
@@ -9,7 +9,7 @@ rapidxml/1.13
 cmake/3.22.6
 
 [options]
-sdl*:shared=False
+# sdl*:shared=False
 
 [generators]
 CMakeDeps

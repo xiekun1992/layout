@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 3.15)
 # project(compressor C)
-project(compresso CXX)
+project(layout CXX)
 
 set(
   SOURCES
   src/main.cpp
   src/layout_engine/UIConverter.cpp
-  src/layout_engine/shapes/Shape.cpp
+  src/layout_engine/shapes/Node.cpp
   src/layout_engine/Engine.cpp
 )
 # find_package(ZLIB REQUIRED)

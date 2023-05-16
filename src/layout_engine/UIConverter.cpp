@@ -2,20 +2,20 @@
 
 UIConverter::UIConverter(std::string filePath)
 {
-  cout << filePath << endl;
+  // cout << filePath << endl;
   try
   {
-    xml_document<> doc;
+    rapidxml::xml_document<> doc;
     // Read the xml file into a vector
-    ifstream theFile(filePath);
-    vector<char> buffer((istreambuf_iterator<char>(theFile)), istreambuf_iterator<char>());
+    std::ifstream theFile(filePath);
+    std::vector<char> buffer((std::istreambuf_iterator<char>(theFile)), std::istreambuf_iterator<char>());
     buffer.push_back('\0');
     // Parse the buffer using the xml file parsing library into doc
     doc.parse<0>(&buffer[0]);
     // Find our root node
-    xml_node<> *rootNode = doc.first_node("div");
+    rapidxml::xml_node<> *rootNode = doc.first_node("root");
     
-    tree = new Shape(
+    tree = new Node(
       stoi(getNodeAttr(rootNode, "x").value_or("0")),
       stoi(getNodeAttr(rootNode, "y").value_or("0")),
       stoi(getNodeAttr(rootNode, "width").value_or("0")),
@@ -23,17 +23,17 @@ UIConverter::UIConverter(std::string filePath)
     );
     traverseNode(rootNode, tree);
   }
-  catch (exception e)
+  catch (std::exception e)
   {
-    cout << "parse error: " << e.what() << endl;
+    std::cout << "parse error: " << e.what() << std::endl;
   }
 }
 
 UIConverter::~UIConverter() {}
 
-optional<string> UIConverter::getNodeAttr(xml_node<>* node, string attrName) {
-  string attrStr;
-  xml_attribute<char> *xattr = node->first_attribute(attrName.c_str());
+std::optional<std::string> UIConverter::getNodeAttr(rapidxml::xml_node<>* node, std::string attrName) {
+  std::string attrStr;
+  rapidxml::xml_attribute<char> *xattr = node->first_attribute(attrName.c_str());
   if (xattr) {
     attrStr = xattr->value();
   }
@@ -41,22 +41,22 @@ optional<string> UIConverter::getNodeAttr(xml_node<>* node, string attrName) {
     attrStr = "0";
   }
   // cout << attrName << ": " << attrStr << endl;
-  return optional<reference_wrapper<string>>{attrStr};
+  return std::optional<std::reference_wrapper<std::string>>{attrStr};
 }
 
-void UIConverter::traverseNode(xml_node<> *node, Shape *shape)
+void UIConverter::traverseNode(rapidxml::xml_node<> *node, Node *shape)
 {
-  for (xml_node<> *subNode = node->first_node("div"); subNode; subNode = subNode->next_sibling())
+  for (rapidxml::xml_node<> *subNode = node->first_node("node"); subNode; subNode = subNode->next_sibling())
   {
-    Shape* subShape = new Shape(
-      stoi(getNodeAttr(subNode, "x").value_or("0")),
-      stoi(getNodeAttr(subNode, "y").value_or("0")),
-      stoi(getNodeAttr(subNode, "width").value_or("0")),
-      stoi(getNodeAttr(subNode, "height").value_or("0"))
+    Node* subShape = new Node(
+      std::stoi(getNodeAttr(subNode, "x").value_or("0")),
+      std::stoi(getNodeAttr(subNode, "y").value_or("0")),
+      std::stoi(getNodeAttr(subNode, "width").value_or("0")),
+      std::stoi(getNodeAttr(subNode, "height").value_or("0"))
     );
 
     shape->children.push_back(subShape);
-    if (subNode->first_node("div") != nullptr) {
+    if (subNode->first_node("node") != nullptr) {
       traverseNode(subNode, subShape);
     }
   }

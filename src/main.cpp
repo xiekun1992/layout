@@ -6,7 +6,7 @@
 #include <GL/glut.h>
 
 #include "layout_engine/Engine.hpp"
-#include "layout_engine/shapes/Shape.hpp"
+#include "layout_engine/shapes/Node.hpp"
 #include "layout_engine/UIConverter.hpp"
 
 int width = 800, height = 600;
@@ -37,8 +37,6 @@ int main (int argc, char *argv[]) {
   glutInitWindowSize(width, height);
   glutInitWindowPosition(0, 0);
   glutCreateWindow("opengl demo");
-
-  // Shape shape(0, 0, 100, 50);
 
   UIConverter converter("E:/Desktop/conan-cmake/ui.xml");
   converter.tree->traverseNode();

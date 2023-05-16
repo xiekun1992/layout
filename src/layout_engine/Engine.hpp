@@ -3,20 +3,20 @@
 
 #include <vector>
 #include <GL/glut.h>
-#include "./shapes/Shape.hpp"
+#include "./shapes/Node.hpp"
 
 class Engine {
   private:
     float xPixelRatio, yPixelRatio;
     int width, height;
   public:
-    Shape* layoutTree;
+    Node* layoutTree;
     Engine(int width, int height);
     ~Engine();
 
-    void layout(Shape* root);
-    void render(Shape* root);
-    void renderShape(Shape* shape);
+    void layout(Node* root);
+    void render(Node* root);
+    void renderShape(Node* shape);
     void display();
 };
 

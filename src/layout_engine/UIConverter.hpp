@@ -6,20 +6,17 @@
 #include <string>
 #include <vector>
 #include <optional>
-#include "./shapes/Shape.hpp"
+#include "./shapes/Node.hpp"
 #include "../../include/rapidxml/rapidxml.hpp"
-
-using namespace rapidxml;
-using namespace std;
 
 class UIConverter {
   public:
-    Shape* tree;
+    Node* tree;
 
     UIConverter(std::string filePath);
     ~UIConverter();
-    void traverseNode(xml_node<>* node, Shape* shape);
-    optional<string> getNodeAttr(xml_node<>* node, string attrName);
+    void traverseNode(rapidxml::xml_node<>* node, Node* shape);
+    std::optional<std::string> getNodeAttr(rapidxml::xml_node<>* node, std::string attrName);
 };
 
 #endif

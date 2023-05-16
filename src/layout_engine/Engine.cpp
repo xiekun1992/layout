@@ -11,11 +11,11 @@ Engine::Engine(int width, int height) {
 
 Engine::~Engine() {}
 
-void Engine::layout(Shape* root) {
+void Engine::layout(Node* root) {
 
 }
 
-void Engine::render(Shape* root) {
+void Engine::render(Node* root) {
   glClear(GL_COLOR_BUFFER_BIT);
   
   renderShape(root);
@@ -23,7 +23,7 @@ void Engine::render(Shape* root) {
   glFlush();
 }
 
-void Engine::renderShape(Shape* shape) {
+void Engine::renderShape(Node* shape) {
   float left = shape->x  - width / 2.0;
   float top = (shape->y * -1.0) + height / 2.0;
   float right = left + shape->width;
@@ -46,7 +46,7 @@ void Engine::renderShape(Shape* shape) {
 
   glEnd();
 
-  for (Shape* child : shape->children) {
+  for (Node* child : shape->children) {
     renderShape(child);
   }
 }
