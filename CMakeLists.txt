@@ -8,6 +8,7 @@ set(
   src/layout_engine/UIConverter.cpp
   src/layout_engine/shapes/Node.cpp
   src/layout_engine/Engine.cpp
+  src/layout_engine/layouts/Flow.cpp
 )
 # find_package(ZLIB REQUIRED)
 # find_package(SDL2 REQUIRED)

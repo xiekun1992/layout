@@ -46,17 +46,26 @@ std::optional<std::string> UIConverter::getNodeAttr(rapidxml::xml_node<>* node, 
 
 void UIConverter::traverseNode(rapidxml::xml_node<> *node, Node *shape)
 {
-  for (rapidxml::xml_node<> *subNode = node->first_node("node"); subNode; subNode = subNode->next_sibling())
+  for (rapidxml::xml_node<> *subNode = node->first_node(); subNode; subNode = subNode->next_sibling())
   {
-    Node* subShape = new Node(
-      std::stoi(getNodeAttr(subNode, "x").value_or("0")),
-      std::stoi(getNodeAttr(subNode, "y").value_or("0")),
-      std::stoi(getNodeAttr(subNode, "width").value_or("0")),
-      std::stoi(getNodeAttr(subNode, "height").value_or("0"))
-    );
+    std::string nodeName(subNode->name());
+    std::cout << nodeName << std::endl;
 
+    Node* subShape = nullptr;
+    if (nodeName == "flow") {
+      subShape = new Flow();
+    } else if (nodeName == "node") {
+      subShape = new Node(
+        std::stoi(getNodeAttr(subNode, "x").value_or("0")),
+        std::stoi(getNodeAttr(subNode, "y").value_or("0")),
+        std::stoi(getNodeAttr(subNode, "width").value_or("0")),
+        std::stoi(getNodeAttr(subNode, "height").value_or("0"))
+      );
+    }
+    // std::cout << subNode->name() << "------" << subShape->children.size() << std::endl;
     shape->children.push_back(subShape);
-    if (subNode->first_node("node") != nullptr) {
+    // std::cout << subNode->name() << "------" << std::endl;
+    if (subNode->first_node() != nullptr) {
       traverseNode(subNode, subShape);
     }
   }

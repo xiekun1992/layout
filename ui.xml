@@ -1,8 +1,10 @@
-<!-- <?xml version="1.0" encoding="utf-8"?> -->
-<root x='0' y='0' width='800' height='600'>
-    <node x='0' y='0' width='80' height='20'></node>
-    <node>
-      <node x='100' y='0' width='200' height='60'></node>
-      <node x='0' y='300' width='300' height='60'></node>
-    </node>
+<?xml version="1.0" encoding="utf-8"?>
+<root width='800' height='600'>
+  <flow>
+    <node width='80' height='20'></node>
+    <flow>
+      <node width='200' height='60'></node>
+      <node width='300' height='60'></node>
+    </flow>
+  </flow>
 </root>

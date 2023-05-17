@@ -7,6 +7,7 @@
 #include <vector>
 #include <optional>
 #include "./shapes/Node.hpp"
+#include "./layouts/Flow.hpp"
 #include "../../include/rapidxml/rapidxml.hpp"
 
 class UIConverter {
